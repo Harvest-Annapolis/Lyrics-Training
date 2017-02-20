@@ -1,0 +1,42 @@
+.lyric_area{
+    background-image:url(background.jpg);
+    background-size:contain;
+    width:915px;
+    height:686px;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#current_lyric{
+    font-size:40px;
+    color:white;
+    text-align:center;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+.staging_area {
+    background:black;
+    width:315px;
+    height:286px;
+    margin-left:30px;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    top:0;
+}
+
+#next_lyric{
+    color:white;
+    text-align:center;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+
+}
+
+#slide_score{
+    color:lightgreen;
+    font-size:90px;    
+    position: absolute;
+    top: 70px;
+    left: 197px;
+}
