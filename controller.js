@@ -5,6 +5,7 @@
     var slides = "";
     var start_time = "";
     var next_slide = 0;
+    var user = "";
 
     $(document).on("keydown", function (e) {
         if (e.originalEvent.keyCode == 32 || e.originalEvent.keyCode == 39) {
@@ -77,5 +78,18 @@
 
         $("#slide_score").html(gap + " seconds " + direction);
         setTimeout(function () { $("#slide_score").html(""); }, 3000);
+    }
+
+    //Save the average time for the song if it beats the previous record
+    function setTime(song_id, avg_time) {
+        var db_song = firebase.database().ref('/user/' + user + '/songs/' + song_id);
+        return db_song.once('value').then(function (snapshot) {
+            console.log(snapshot)
+            if (snapshot.val() == null || snapshot.val().score > avg_time) {
+                db_song.set({
+                    score: avg_time
+                });
+            }
+        });
     }
 });
