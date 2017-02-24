@@ -9,13 +9,30 @@
         <script src="controller.js"></script>
     </head>
     <body>
-        <div class="lyric_area">
-            <span id="current_lyric">Rules:<br />Press space or right to advance lyrics<br />Try to keep time<br />Press space or right to start</span>
+        <div class="standard_page">
+            <div class="main_area">
+                <div class="lyric_area">
+                    <div id="slide_score"></div>
+                    <span id="current_lyric">Rules:<br />Press space or right to advance lyrics<br />Try to keep time<br />Press space or right to start</span>
+                </div>
+            </div>
+
+            <div class="staging_area">
+                <span id="next_lyric"></span>
+            </div>
         </div>
-        <div class="staging_area">
-            <span id="next_lyric"></span>
+
+        <div class="fullscreen">
+            <div class="fullscreen_background"></div>
+            <div class="modal">
+                <div class="modal_body">
+                    <a class="x_button">×</a>
+                    <div class="modal_text"></div>
+                    <input class="close_button" type="button" value="Close" />
+                </div>
+            </div>
         </div>
-        <div id="slide_score"></div>
+
         <audio id="song"></audio>
     </body>
 </html>
