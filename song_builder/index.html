@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <link href="styles.css" rel="stylesheet" />
+        <script src="controller.js"></script>
+    </head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <input type="button" value="Generate" id="generate" class="btn btn-primary generate_btn" />
+            <div class="col-xs-12">
+                <div class="builder_desc">
+                    Hey, welcome to the song builder!  This is here so other people besides Tyler can build those obnoxious song JSONs. <br />
+                    So, let's talk about how this thing works. Some hints, tips, and tricks, as it were.<br />
+                    So, here's how this is gonna work, you fill in the fields, and when you hit "Generate", it will give you a JSON to send me. <br />
+                    (Note: these aren't saved anywhere, and will be lost on refresh, so don't be a fool and accidently refresh the page) <br />
+                    In the lyrics box, you can use [blank] for a blank slide, and 2 enters is a slide break.  The slides will appear on the right, and you can put a time in next to them. <br />
+                    Note: The time <strong>MUST</strong> be in the format minutes:seconds.milliseconds.  I.e. 3:24.521 (3 minutes, 24.521 seconds (no more than 3 digits after the dot please)). <br />
+                    Note: The time corresponds to when that slide should <strong>START</strong> displaying.  E.g. the first slide should have a 20 second time or so (whenever the vocals start). <br />
+                    Hit Generate at any time.  It won't break anything or anything.  Don't be nervous.  It's gonna just give you a JSON string to send to me, which I can add to the system.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <form>
+                    <div class="form-group">
+                        <label for="title">Song Title</label>
+                        <input type="text" class="form-control" id="title" placeholder="Song Title">
+                    </div>
+                    <div class="form-group">
+                        <label for="url">Youtube URL</label>
+                        <input type="text" class="form-control" id="url" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                    </div>
+                    <div class="form-group">
+                        <label for="lyrics">Lyrics</label>
+                        <textarea class="form-control" rows="40" id="lyrics" placeholder=""></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-6" id="slide_area">
+                <div>
+                    <div class="staging_area">
+                        <span class="next_lyric">Come on and speak against<br />My borrowed innocence<br />The judge is my defense<br />I'm going free</span>
+                    </div><input type="text" class="slide_time" placeholder="0:00.000" />
+                </div>
+                <div>
+                    <div class="staging_area">
+                        <span class="next_lyric"></span>
+                    </div><input type="text" class="slide_time" placeholder="0:00.000" />
+                </div>
+                <div>
+                    <div class="staging_area">
+                        <span class="next_lyric">Glory, glory<br />Hallelujah<br />You threw my shackles in the sea</span>
+                    </div><input type="text" class="slide_time" placeholder="0:00.000" />
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
