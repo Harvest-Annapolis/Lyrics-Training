@@ -1,4 +1,8 @@
 ﻿$(function () {
+    // Game Control variables
+    var handicapped_on = false;
+    var handicapped_interval = "";
+
     // Song list variables
     var songs = "";
     var song_selected = "";
@@ -83,6 +87,10 @@
             $("#next_lyric").html("Next<br />=======================<br />" + slides[0].lyrics);
             song.play();
             start_time = new Date();
+
+            if (handicapped_on) {
+                handicapped_interval = setInterval(render_handicapped, 100);
+            }
         }, true);
         song.load();
     }
@@ -112,7 +120,14 @@
             }
             queue_modal = reset;
 
-            update_score(song_selected.Id, avg)
+            if (handicapped_on) {
+                clearInterval(handicapped_interval);
+                $("#h_current_time").html("")
+                $("#h_next_time").html("")
+            }
+            else {
+                update_score(song_selected.Id, avg)
+            }
         }
         $("#current_lyric").html(slides[next_slide].lyrics);
         next_slide++;
@@ -136,6 +151,11 @@
         song_select();
     }
 
+    function render_handicapped() {
+        $("#h_current_time").html(msToTime((new Date() - start_time)))
+        $("#h_next_time").html(msToTime(slides[next_slide].target_time))
+    }
+
     // tells the user their score for the slide
     function alert_score(target, guess) {
         direction = "early";
@@ -155,7 +175,7 @@
     // song select menu
     function song_select() {
         lock_modal = true;
-        var output_html = "";
+        var output_html = '<label class="handicapped_area" for="handicapped_mode">Training mode&nbsp;<a id="handicapped_help">(<span style="border-bottom:1px dashed gray;">explanation</span>)</a>:&nbsp;&nbsp;&nbsp;&nbsp;<label><div class="onoffswitch"><input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="handicapped_mode"><label class="onoffswitch-label" for="handicapped_mode"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch"></span></label></div></label></label>';
         $(songs).each(function (i, val) {
             var status = "✓";
             var color = "green"
@@ -166,6 +186,14 @@
         });
         modal(output_html);
     }
+
+    $(".modal").on("change", "#handicapped_mode", function () {
+        handicapped_on = $("#handicapped_mode").prop("checked");
+    });
+    $(".modal").on("click", "#handicapped_help", function () {
+        alert("If you turn on Training Mode, you will see a timer that indicates when you should hit the next slide.\n\nNote: When in training mode, your score *will not* be saved.  You can't cheat your way onto the leaderboard.  Not on my watch.");
+    });
+
 
     $(".modal").on("click", ".song_select_button", function (e) {
         var id = $(e.target).data("id");
@@ -195,6 +223,16 @@
         close_modal();
     });
 
+
+    function msToTime(duration) {
+        var milliseconds = parseInt((duration % 1000) / 100)
+            , seconds = parseInt((duration / 1000) % 60)
+            , minutes = parseInt((duration / (1000 * 60)) % 60);
+
+        seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+        return minutes + ":" + seconds + "." + milliseconds;
+    }
 
 
     //*********************************************************************************************
