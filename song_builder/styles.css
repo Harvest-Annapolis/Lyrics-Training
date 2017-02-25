@@ -15,6 +15,14 @@
     z-index:10;
 }
 
+.help_btn {    
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 35px;
+    z-index:10;
+}
+
 #lyrics {
     max-width:100%;
 }

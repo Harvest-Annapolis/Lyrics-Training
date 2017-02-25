@@ -13,11 +13,60 @@
               }
             ]
         };
+
+
+
+
+
+
+    $("#slide_area").on("blur", ".slide_time", function (e) {
+        var thing = $(e.target);
+        var no_format = thing.val().split('').filter(function (val, i) { return !isNaN(val); }).join("");
+
+        thing.removeClass("input_error")
+
+        // Good job, you don't suck
+        if (thing.val().indexOf(':') != -1 && thing.val().indexOf('.') != -1) {
+            return;
+        }
+
+        // double colon
+        var small_bad = thing.val().split(':');
+        if (small_bad.length == 3) {
+            thing.val(small_bad[0] + ":" + small_bad[1] + "." + small_bad[2]);
+            return;
+        }
+
+        // single colon, but no other special symbols
+        if (small_bad.length == 2 && thing.val().length == (no_format.length + 1)) {
+            thing.val(thing.val() + ".0");
+        }
+
+        if (no_format.length >= 6) {
+            thing.val(no_format.substr(0, no_format.length - 5) + ":" + no_format.substr(no_format.length - 5, 2) + "." + no_format.substr(no_format.length - 3));
+        }
+        else if (no_format.length == 5) {
+            thing.val(no_format.substr(0, no_format.length - 4) + ":" + no_format.substr(no_format.length - 4, 2) + "." + no_format.substr(no_format.length - 2));
+        }
+        else if (no_format.length == 4) {
+
+            thing.val(no_format.substr(0, no_format.length - 3) + ":" + no_format.substr(no_format.length - 3, 2) + "." + no_format.substr(no_format.length - 1));
+        }
+        else if (no_format.length == 3) {
+            thing.val(no_format.substr(0, no_format.length - 2) + ":" + no_format.substr(no_format.length - 2, 2) + ".0");
+        }
+        else if (no_format.length < 3) {
+            thing.addClass("input_error")
+        }
+    });
+
+
+
+
     var slide_base_open = '<div><div class="staging_area"><span class="next_lyric">';
     var slide_base_mid = '</span></div><input type="text" class="slide_time" value="';
     var slide_base_close = '" placeholder="0:00.000" /></div>';
-
-
+            
     var timeout = "";
     $("#lyrics").on("keydown", function () {
         clearTimeout(timeout);
@@ -63,6 +112,23 @@
         });
     }
 
+    
+    $("#lyrics_help").on("click", function () {
+        console.log("hrre");
+        alert(
+            "Okay, this help dialog is in the works, so bear with me.\n" +
+            "Note: The page loads with an example already filled out, so if you have questions, it might help to open the page in another tab and look at the example.\n\n" +
+
+            "1)  End your lyrics with a blank slide (by using [blank]).\n\n" +
+
+            "2)  Try to format your times as MM:ss.mmm.  This isn't 100% necessary because it fixes it a little on the fly, but do try.\n\n" +
+
+            "3)  All times should be the time that the slide should START displaying.  I'm trusting your times people, so don't screw it up.\n\n" +
+
+            "Umm... as people ask more questions, I'll flesh this out more.  If you text/email me a question, " +
+            "I'll let you know, then put the answer up here for other people, so please ask questions.  I want to make this better for everyone."
+        );
+    });
 
     $("#generate").on("click", function () {
         var unfilled = $("input,textarea").filter(function (i, val) { return $(val).val() == "" });
@@ -134,6 +200,7 @@
     lyrics_placeholder += "[blank]\n\n";
     lyrics_placeholder += "Glory, glory\n";
     lyrics_placeholder += "Hallelujah\n";
-    lyrics_placeholder += "You threw my shackles in the sea";
+    lyrics_placeholder += "You threw my shackles in the sea\n\n";
+    lyrics_placeholder += "[blank]";
     $("#lyrics").attr("placeholder", lyrics_placeholder);
 });
