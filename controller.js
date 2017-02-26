@@ -90,7 +90,7 @@
             song.play();
             start_time = new Date();
 
-            if (handicapped_on) {
+            if (handicapped_on && !autoplay_on) {
                 handicapped_interval = setInterval(render_handicapped, 100);
             }
         }, true);
@@ -125,18 +125,19 @@
             }
             queue_modal = reset;
 
-            if (handicapped_on) {
-                clearInterval(handicapped_interval);
-                $("#h_current_time").html("")
-                $("#h_next_time").html("")
-            }
-            else if (autoplay_on) {
+
+            if (autoplay_on) {
                 clearInterval(autoplay_interval)
                 $("#h_current_time").html("")
                 $("#h_next_time").html("")
                 autoplay_on = false;
                 // close modal because it's a cleaner way of launching reset
                 close_modal();
+            }
+            else if (handicapped_on) {
+                clearInterval(handicapped_interval);
+                $("#h_current_time").html("")
+                $("#h_next_time").html("")
             }
             else {
                 update_score(song_selected.Id, avg)
@@ -197,7 +198,7 @@
     // song select menu
     function song_select() {
         lock_modal = true;
-        var output_html = '<label class="handicapped_area" for="handicapped_mode">Training mode&nbsp;<a id="handicapped_help">(<span style="border-bottom:1px dashed gray;">explanation</span>)</a>:&nbsp;&nbsp;&nbsp;&nbsp;<label><div class="onoffswitch"><input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="handicapped_mode"><label class="onoffswitch-label" for="handicapped_mode"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch"></span></label></div></label></label>';
+        var output_html = '<label class="handicapped_area" for="handicapped_mode">Training mode&nbsp;<a id="handicapped_help">(<span style="border-bottom:1px dashed gray;">explanation</span>)</a>:&nbsp;&nbsp;&nbsp;&nbsp;<label><div class="onoffswitch"><input type="checkbox" name="onoffswitch" ' + (handicapped_on ? "checked" : "") + ' class="onoffswitch-checkbox" id="handicapped_mode"><label class="onoffswitch-label" for="handicapped_mode"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch"></span></label></div></label></label>';
         $(songs).each(function (i, val) {
             var status = "✓";
             var color = "green"
