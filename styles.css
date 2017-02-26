@@ -141,7 +141,9 @@
     text-align: center;
 }
 .user_label {
-    width:25%
+    width:25%;    
+    background-color: #e5e5e5;
+    padding: 7px;
 }
 .user_button {
     padding:6px;
@@ -154,6 +156,12 @@
     margin:0;
     text-align:center;
     margin-top:10px
+}
+.leaderboard_wrapper {
+    width:100%;
+    padding:0;
+    margin:0;
+    text-align:center;
 }
 
 

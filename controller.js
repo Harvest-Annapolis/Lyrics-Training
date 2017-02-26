@@ -26,7 +26,7 @@
     var queue_modal = function(){};
 
     // User Stuff
-    modal('<div class="user_block"><label class="user_label" for="username">Username: </label><input type="text" autofocus class="user_input" id="username" /></div><div class="user_button_wrapper"><input type="button" value="Log In" class="user_button" /></div>')
+    modal('<div class="user_block"><label class="user_label" for="username">Username: </label><input type="text" autofocus class="user_input" id="username" /></div><div class="user_button_wrapper"><input type="button" value="Log In" class="user_button" /></div><div class="leaderboard_wrapper"><br />--- OR ---<br /><br /><a target="_blank" href="leaderboard">Go to the Leaderboard</a></div>')
     $(".modal").on("click", ".user_button", function () {
         if ($(".user_button").val() == "") {
             alert("Please specify a username.");
