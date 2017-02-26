@@ -1,7 +1,9 @@
 ﻿$(function () {
     // Game Control variables
     var handicapped_on = false;
-    var handicapped_interval = "";
+    var handicapped_interval = null;
+    var autoplay_on = false;
+    var autoplay_interval = null;
 
     // Song list variables
     var songs = "";
@@ -113,7 +115,10 @@
             });
             avg = Math.round((summation / slides.length) * 100) / 100.0;
             if (avg < 1) {
-                modal("Congrats!  You had an average error of " + avg + ".  That's pretty good.  Proud of you.  :)");
+                if (!autoplay_on)
+                {
+                    modal("Congrats!  You had an average error of " + avg + ".  That's pretty good.  Proud of you.  :)");
+                }
             }
             else {
                 modal("Aw, come on buddy.  You had an average error of " + avg + ".  You can do better than that.  Let's try again, okay.  :)");
@@ -124,6 +129,14 @@
                 clearInterval(handicapped_interval);
                 $("#h_current_time").html("")
                 $("#h_next_time").html("")
+            }
+            else if (autoplay_on) {
+                clearInterval(autoplay_interval)
+                $("#h_current_time").html("")
+                $("#h_next_time").html("")
+                autoplay_on = false;
+                // close modal because it's a cleaner way of launching reset
+                close_modal();
             }
             else {
                 update_score(song_selected.Id, avg)
@@ -155,6 +168,15 @@
         $("#h_current_time").html(msToTime((new Date() - start_time)))
         $("#h_next_time").html(msToTime(slides[next_slide].target_time))
     }
+    function render_autoplay() {
+        var time_cur = (new Date() - start_time)
+        $("#h_current_time").html(msToTime(time_cur))
+        $("#h_next_time").html(msToTime(slides[next_slide].target_time))
+
+        if (time_cur >= slides[next_slide].target_time) {
+            advance_slide();
+        }
+    }
 
     // tells the user their score for the slide
     function alert_score(target, guess) {
@@ -182,7 +204,7 @@
             if (val.high_score == "") { status = ""; }
             else if (val.high_score > 1) { color = "red"; status = ""; }
 
-            output_html += '<a class="song_select_button" data-id="' + val.Id + '">' + val.title + '<span style="float:right;color:' + color + ';">' + val.high_score + "&nbsp;&nbsp;" + status + '</span></a>'
+            output_html += '<a class="song_select_button" data-id="' + val.Id + '">' + val.title + '<span style="float:right;color:' + color + ';">' + val.high_score + "&nbsp;&nbsp;" + status + '</span></a><a class="auto_play" data-id="' + val.Id + '">auto-play</a>'
         });
         modal(output_html);
     }
@@ -194,6 +216,18 @@
         alert("If you turn on Training Mode, you will see a timer that indicates when you should hit the next slide.\n\nNote: When in training mode, your score *will not* be saved.  You can't cheat your way onto the leaderboard.  Not on my watch.");
     });
 
+
+    $(".modal").on("click", ".auto_play", function (e) {
+        var id = $(e.target).data("id");
+        song_selected = songs.filter(function (val2, i2) { return val2.Id == id; })[0];
+        lock_modal = false;
+        close_modal();
+
+        autoplay_on = true;
+        launch_training(song_selected);
+        //timeout to stop the next button from being hit before setup
+        setTimeout(function () { autoplay_interval = setInterval(render_autoplay, 10);  }, 300);        
+    });
 
     $(".modal").on("click", ".song_select_button", function (e) {
         var id = $(e.target).data("id");
