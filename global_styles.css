@@ -1,14 +1,19 @@
 ﻿header {
-    border-bottom:1px solid #808080;
+    height:75px;
+    width:100%;
+    position:fixed;
+    background:white;
+    z-index:100;
+    border-bottom:1px solid #150236;
 }
 
 .banner_image{
-    width:35%;
-    margin: 20px 0;
+    height:54px;
+    margin: 10px 0;
 }
 
-body{
-    background-color:#ccc;
+.page{
+    background-color:#d9ccf0;
 }
 
 .content-area{

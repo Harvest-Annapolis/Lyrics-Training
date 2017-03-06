@@ -16,94 +16,96 @@
     <header>
         <img class="banner_image" src=" ../banner_image.png" />
     </header>
-    <div class="container-fluid">
-
-
-
-        <div class="row"><div class="col-xs-6"></div></div>
-
-
-
-
-        <div class="row content-area">
-            <input type="button" value="Lyrics Help" id="lyrics_help" class="btn help_btn" />
-            <input type="button" value="Generate" id="generate" class="btn btn-primary generate_btn" />
-            <div class="col-xs-12">
-                <div class="builder_desc">
-                    Hey, welcome to the song builder!  This is here so other people besides Tyler can build those obnoxious song JSONs. <br />
-                    So, let's talk about how this thing works. Some hints, tips, and tricks, as it were.<br />
-                    So, here's how this is gonna work, you fill in the fields, and when you hit "Generate", it will give you a JSON to send me. <br />
-                    (Note: these aren't saved anywhere, and will be lost on refresh, so don't be a fool and accidently refresh the page) <br />
-                    In the lyrics box, you can use [blank] for a blank slide, and 2 enters is a slide break.  The slides will appear on the right, and you can put a time in next to them. <br />
-                    Note: Please <strong>end your lyrics with a blank slide</strong>.  This is important because we do grade on if you are clearing the lyrics away at the right time.  Thanks!<br />
-                    Note: The time MUST be in the format <strong>minutes:seconds.milliseconds</strong>.  I.e. 3:24.521 (3 minutes, 24.521 seconds (no more than 3 digits after the dot please)). <br />
-                    Note: The time corresponds to <strong>when that slide should START displaying</strong>.  E.g. the first slide should have a 20 second time or so (whenever the vocals start). <br />
-                    Hit Generate at any time.  It won't break anything or anything.  Don't be nervous.  It's gonna just give you a JSON string to send to me, which I can add to the system.
-                </div>
-            </div>
-        </div>
+    <div class="container-fluid page">
         <div class="row">
-            <div class="col-xs-6">
-                <form>
-                    <div class="form-group">
-                        <label for="title">Song Title</label>
-                        <input type="text" class="form-control" id="title" placeholder="Song Title">
-                    </div>
-                    <div class="form-group">
-                        <label for="url">Youtube URL</label>
-                        <input type="text" class="form-control" id="url" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-                    </div>
-                    <div class="form-group">
-                        <label for="lyrics">Lyrics</label>
-                        <textarea class="form-control" rows="40" id="lyrics" placeholder=""></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="col-xs-6" id="slide_area">
-                <div>
-                    <div class="staging_area">
-                        <span class="next_lyric">Come on and speak against<br />My borrowed innocence<br />The judge is my defense<br />I'm going free</span>
-                    </div><input type="text" class="slide_time" placeholder="0:00.000" />
-                </div>
-                <div>
-                    <div class="staging_area">
-                        <span class="next_lyric"></span>
-                    </div><input type="text" class="slide_time" placeholder="0:00.000" />
-                </div>
-                <div>
-                    <div class="staging_area">
-                        <span class="next_lyric">Glory, glory<br />Hallelujah<br />You threw my shackles in the sea</span>
-                    </div><input type="text" class="slide_time" placeholder="0:00.000" />
-                </div>
-                <div>
-                    <div class="staging_area">
-                        <span class="next_lyric"></span>
-                    </div><input type="text" class="slide_time" placeholder="0:00.000" />
-                </div>
-            </div>
-        </div>
-    </div>
+            <div class="col-md-offset-1 col-md-10 col-sm-12 content-area">
 
 
-    <div id="success_modal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Success</h4>
+                <div class="row">
+                    <input type="button" value="Lyrics Help" id="lyrics_help" class="btn help_btn" />
+                    <input type="button" value="Generate" id="generate" class="btn btn-primary generate_btn" />
+                    <div class="col-xs-12">
+                        <div class="builder_desc">
+                            Hey, welcome to the song builder!  This is here so other people besides Tyler can build those obnoxious song JSONs. <br />
+                            So, let's talk about how this thing works. Some hints, tips, and tricks, as it were.<br />
+                            So, here's how this is gonna work, you fill in the fields, and when you hit "Generate", it will give you a JSON to send me. <br />
+                            (Note: these aren't saved anywhere, and will be lost on refresh, so don't be a fool and accidently refresh the page) <br />
+                            In the lyrics box, you can use [blank] for a blank slide, and 2 enters is a slide break.  The slides will appear on the right, and you can put a time in next to them. <br />
+                            Note: Please <strong>end your lyrics with a blank slide</strong>.  This is important because we do grade on if you are clearing the lyrics away at the right time.  Thanks!<br />
+                            Note: The time MUST be in the format <strong>minutes:seconds.milliseconds</strong>.  I.e. 3:24.521 (3 minutes, 24.521 seconds (no more than 3 digits after the dot please)). <br />
+                            Note: The time corresponds to <strong>when that slide should START displaying</strong>.  E.g. the first slide should have a 20 second time or so (whenever the vocals start). <br />
+                            Hit Generate at any time.  It won't break anything or anything.  Don't be nervous.  It's gonna just give you a JSON string to send to me, which I can add to the system.
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <p>Congrats, you did it!  You made a song!</p>
-                    <p>We actually saved it to the database, so just let Tyler know and he'll go activate it. </p>
-                    <p>And, while it is saved, you may want to keep this for your records.  You'd hate to have gone through all that effort only to have it disappear right?  If Tyler says there was an issue, just mail the following to him.  That ought to shut him up.  :)</p>
-                    <br /><br />
-                    <div id="jsonificated" style="max-height:200px;overflow-y:scroll;"></div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <form>
+                            <div class="form-group">
+                                <label for="title">Song Title</label>
+                                <input type="text" class="form-control" id="title" placeholder="Song Title">
+                            </div>
+                            <div class="form-group">
+                                <label for="url">Youtube URL</label>
+                                <input type="text" class="form-control" id="url" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                            </div>
+                            <div class="form-group">
+                                <label for="lyrics">Lyrics</label>
+                                <textarea class="form-control" rows="40" id="lyrics" placeholder=""></textarea>
+                            </div>
+                        </form>
+                        <br />
+                        <br />
+                    </div>
+                    <div class="col-xs-6" id="slide_area">
+                        <div>
+                            <div class="staging_area">
+                                <span class="next_lyric">Come on and speak against<br />My borrowed innocence<br />The judge is my defense<br />I'm going free</span>
+                            </div><input type="text" class="slide_time" placeholder="0:00.000" />
+                        </div>
+                        <div>
+                            <div class="staging_area">
+                                <span class="next_lyric"></span>
+                            </div><input type="text" class="slide_time" placeholder="0:00.000" />
+                        </div>
+                        <div>
+                            <div class="staging_area">
+                                <span class="next_lyric">Glory, glory<br />Hallelujah<br />You threw my shackles in the sea</span>
+                            </div><input type="text" class="slide_time" placeholder="0:00.000" />
+                        </div>
+                        <div>
+                            <div class="staging_area">
+                                <span class="next_lyric"></span>
+                            </div><input type="text" class="slide_time" placeholder="0:00.000" />
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+            
+                <div id="success_modal" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Success</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Congrats, you did it!  You made a song!</p>
+                                <p>We actually saved it to the database, so just let Tyler know and he'll go activate it. </p>
+                                <p>And, while it is saved, you may want to keep this for your records.  You'd hate to have gone through all that effort only to have it disappear right?  If Tyler says there was an issue, just mail the following to him.  That ought to shut him up.  :)</p>
+                                <br /><br />
+                                <div id="jsonificated" style="max-height:200px;overflow-y:scroll;"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+
+            </div><!-- end content-area -->
+        </div><!-- end main row -->
+
+    </div><!-- end page -->
 </body>
 </html>
