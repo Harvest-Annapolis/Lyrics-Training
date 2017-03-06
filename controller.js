@@ -65,6 +65,7 @@
         if (song_running)
         {
             if (e.originalEvent.keyCode == 32 || e.originalEvent.keyCode == 39) {
+                e.preventDefault();
                 if (!started) {
                     launch_training(song_selected);
                 }
@@ -91,6 +92,7 @@
             start_time = new Date();
 
             if (handicapped_on && !autoplay_on) {
+                clearInterval(handicapped_interval);
                 handicapped_interval = setInterval(render_handicapped, 100);
             }
         }, true);
@@ -205,7 +207,7 @@
             if (val.high_score == "") { status = ""; }
             else if (val.high_score > 1) { color = "red"; status = ""; }
 
-            output_html += '<a class="song_select_button" data-id="' + val.Id + '">' + val.title + '<span style="float:right;color:' + color + ';">' + val.high_score + "&nbsp;&nbsp;" + status + '</span></a><a class="auto_play" data-id="' + val.Id + '">auto-play</a>'
+            output_html += '<a class="song_select_button" data-id="' + val.Id + '">' + val.title + '<span data-id="' + val.Id + '" style="float:right;color:' + color + ';">' + val.high_score + "&nbsp;&nbsp;" + status + '</span></a><a class="auto_play" data-id="' + val.Id + '">auto-play</a>'
         });
         my_modal(output_html);
     }
@@ -227,7 +229,11 @@
         autoplay_on = true;
         launch_training(song_selected);
         //timeout to stop the next button from being hit before setup
-        setTimeout(function () { autoplay_interval = setInterval(render_autoplay, 10);  }, 300);        
+        
+        setTimeout(function () {
+            clearInterval(autoplay_interval);
+            autoplay_interval = setInterval(render_autoplay, 10);
+        }, 300);
     });
 
     $(".modal").on("click", ".song_select_button", function (e) {
@@ -241,7 +247,10 @@
     // modal control
     function my_modal(text) {
         $(".modal_text").html(text);
-        $("#my_modal").modal();
+        $("#my_modal").modal({
+            backdrop: 'static',
+            keyboard: false
+        });
     }
     function close_modal() {
         if (!lock_modal) {

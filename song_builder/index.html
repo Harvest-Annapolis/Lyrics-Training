@@ -2,7 +2,6 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         
         <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase.js"></script>
@@ -14,7 +13,7 @@
     </head>
 <body>
     <header>
-        <img class="banner_image" src=" ../banner_image.png" />
+        <a href=".." class="header_img"><img class="banner_image" src=" ../banner_image.png" /></a>
     </header>
     <div class="container-fluid page">
         <div class="row">
@@ -22,8 +21,8 @@
 
 
                 <div class="row">
-                    <input type="button" value="Lyrics Help" id="lyrics_help" class="btn help_btn" />
-                    <input type="button" value="Generate" id="generate" class="btn btn-primary generate_btn" />
+                    <input type="button" value="Lyrics Help" id="lyrics_help" class="help_btn btn btn-default" />
+                    <input type="button" value="Generate" id="generate" class="generate_btn btn btn-primary" />
                     <div class="col-xs-12">
                         <div class="builder_desc">
                             Hey, welcome to the song builder!  This is here so other people besides Tyler can build those obnoxious song JSONs. <br />
@@ -105,7 +104,6 @@
 
             </div><!-- end content-area -->
         </div><!-- end main row -->
-
     </div><!-- end page -->
 </body>
 </html>

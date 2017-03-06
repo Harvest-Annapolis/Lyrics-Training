@@ -13,7 +13,7 @@
                 // For each song
                 $(data).each(function (i, val) {
                     // Song Header
-                    html_fill += '<div class="col-xs-3"><h3>' + val.title + '</h3><ul class="list-group">';
+                    html_fill += '<div class="col-xs-3 song_score"><h3>' + val.title + '</h3><ul class="list-group">';
                     var song_users = []
                     // Pull out the relevant users for sorting and display
                     for (var val2 in user_data) {

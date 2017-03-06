@@ -14,8 +14,10 @@
 
 .page{
     background-color:#d9ccf0;
+    min-height:100%;
 }
 
 .content-area{
     background-color:white;
+    padding-top:80px
 }

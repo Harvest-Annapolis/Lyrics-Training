@@ -4,6 +4,7 @@
     width:915px;
     height:686px;
 }
+
 .lyric_area{
     background-image:url(background.png);
     background-size:cover;
@@ -13,6 +14,10 @@
     display:inline-flex;
     justify-content:center;
     align-items:center;
+}
+
+.song_zone {
+    padding-top:20px;
 }
 
 #current_lyric{
