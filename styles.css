@@ -18,6 +18,7 @@
 
 .song_zone {
     padding-top:20px;
+	min-height:100%;
 }
 
 #current_lyric{
