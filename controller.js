@@ -28,7 +28,7 @@
     var queue_modal = function(){};
 
     // User Stuff
-    modal('<div class="user_block"><label class="user_label" for="username">Username: </label><input type="text" autofocus class="user_input" id="username" /></div><div class="user_button_wrapper"><input type="button" value="Log In" class="user_button" /></div><div class="leaderboard_wrapper"><br />--- OR ---<br /><br /><a target="_blank" href="leaderboard">Go to the Leaderboard</a></div>')
+    my_modal('<div class="input-group user_block"><label class="input-group-addon user_label" for="username">Username: </label><input type="text" autofocus class="form-control user_input" id="username" /></div><div class="user_button_wrapper"><input type="button" value="Log In" class="btn btn-primary user_button" /></div><div class="leaderboard_wrapper"><br />--- OR ---<br /><br /><a target="_blank" href="leaderboard">Go to the Leaderboard</a></div>');
     $(".modal").on("click", ".user_button", function () {
         if ($(".user_button").val() == "") {
             alert("Please specify a username.");
@@ -73,7 +73,7 @@
                 }
             }        
             if (e.originalEvent.keyCode == 72) {
-                modal(slides.map(function (val, i) { return val.time_hit; }).join("<br />"));
+                my_modal(slides.map(function (val, i) { return val.time_hit; }).join("<br />"));
             }
         }
     });
@@ -117,13 +117,13 @@
             if (avg < 1) {
                 if (!autoplay_on)
                 {
-                    modal("Congrats!  You had an average error of " + avg + ".  That's pretty good.  Proud of you.  :)");
+                    my_modal("Congrats!  You had an average error of " + avg + ".  That's pretty good.  Proud of you.  :)");
                 }
             }
             else {
-                modal("Aw, come on buddy.  You had an average error of " + avg + ".  You can do better than that.  Let's try again, okay.  :)");
+                my_modal("Aw, come on buddy.  You had an average error of " + avg + ".  You can do better than that.  Let's try again, okay.  :)");
             }
-            queue_modal = reset;
+            queue_modal = function () { setTimeout(reset, 700); };
 
 
             if (autoplay_on) {
@@ -207,7 +207,7 @@
 
             output_html += '<a class="song_select_button" data-id="' + val.Id + '">' + val.title + '<span style="float:right;color:' + color + ';">' + val.high_score + "&nbsp;&nbsp;" + status + '</span></a><a class="auto_play" data-id="' + val.Id + '">auto-play</a>'
         });
-        modal(output_html);
+        my_modal(output_html);
     }
 
     $(".modal").on("change", "#handicapped_mode", function () {
@@ -239,13 +239,13 @@
     });
 
     // modal control
-    function modal(text) {
+    function my_modal(text) {
         $(".modal_text").html(text);
-        $(".fullscreen").css("display", "flex");
+        $("#my_modal").modal();
     }
     function close_modal() {
         if (!lock_modal) {
-            $(".fullscreen").css("display", "none");
+            $('#my_modal').modal('hide')
         }
         else {
             alert("The modal cannot be dismissed right now.")
@@ -254,7 +254,7 @@
         queue_modal();
         queue_modal = function () { };
     }
-    $(".x_button,.close_button,.fullscreen_background").on("click", function () {
+    $(".x_button,.close_button").on("click", function () {
         close_modal();
     });
 

@@ -176,9 +176,21 @@
         }
         
         if (err_count == 0)
-            alert("Email the following to Tyler:\n\n" + JSON.stringify(new_song));
+        {
+
+            var db_writer = firebase.database().ref('/submissions/' + $("#title").val());
+            db_writer.once('value').then(function (snapshot) {
+                db_writer.set({
+                    json: JSON.stringify(new_song)
+                });
+                $("#jsonificated").text(JSON.stringify(new_song))
+                $("#success_modal").modal();
+            });
+        }
         else
+        {
             alert(err_count + " of your times are formatted poorly.  Please double check those and make sure they all conform to mm:ss.mmm.\n\nNote: the first symbol is a colon, and the second is a period.  Make sure you didn't do colon-colon or something.  Note, you *have* to have both in your time (though you can just put a zero after the period (e.g. 1:00.0 is a valid time)).");
+        }
     });
 
 
