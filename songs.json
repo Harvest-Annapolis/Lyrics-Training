@@ -3,7 +3,7 @@
     "Id": "0",
     "title": "Jailbreak",
     "song_file": "jailbreak.mp3",
-    "high_score":  "",
+    "high_score": "",
     "slides": [
       {
         "lyrics": "Go on and speak against<br />my borrowed innocence<br />The judge is my defense,<br />I'm going free",
@@ -133,10 +133,10 @@
     ]
   },
   {
-    "Id" :  "1",
+    "Id": "1",
     "title": "Exalted Over All",
     "song_file": "exaltedoverall.mp3",
-    "high_score":  "",
+    "high_score": "",
     "slides": [
       {
         "lyrics": "From heaven's throne<br />You came to us<br />And set your heart<br />Upon the cross",
@@ -326,6 +326,84 @@
       {
         "lyrics": "",
         "target_time": "361907",
+        "time_hit": ""
+      }
+    ]
+  },
+  {
+    "Id": "2",
+    "title": "Lamb Of God",
+    "song_file": "lambofgod.mp3",
+    "high_score": "",
+    "slides": [
+      {
+        "lyrics": "You came from heavens throne<br>Aquainted with our sorrow<br>To trade the debt we owed<br>Your suffering for our freedom",
+        "target_time": "12500",
+        "time_hit": ""
+      },
+      {
+        "lyrics": "The Lamb of God, in my place<br>Your blood poured out, my sin erased",
+        "target_time": "40000",
+        "time_hit": ""
+      },
+      {
+        "lyrics": "It was my death you died<br>I am raised to life<br>Hallelujah, the lamb of God",
+        "target_time": "54500",
+        "time_hit": ""
+      },
+      {
+        "lyrics": "",
+        "target_time": "68000",
+        "time_hit": ""
+      },
+      {
+        "lyrics": "My name upon your heart<br>My shame upon your shoulders<br>The power of sin undone<br>The cross for my salvation",
+        "target_time": "71500",
+        "time_hit": ""
+      },
+      {
+        "lyrics": "The Lamb of God, in my place<br>Your blood poured out, my sin erased",
+        "target_time": "98000",
+        "time_hit": ""
+      },
+      {
+        "lyrics": "It was my death you died<br>I am raised to life<br>Hallelujah, the lamb of God",
+        "target_time": "112000",
+        "time_hit": ""
+      },
+      {
+        "lyrics": "There is no greater love<br>There is no greater love<br>The Savior lifted up<br>There is no greater love, no",
+        "target_time": "125000",
+        "time_hit": ""
+      },
+      {
+        "lyrics": "There is no greater love<br>There is no greater love<br>The Savior lifted up<br>There is no greater love",
+        "target_time": "151000",
+        "time_hit": ""
+      },
+      {
+        "lyrics": "The Lamb of God, in my place<br>Your blood poured out, my sin erased",
+        "target_time": "179000",
+        "time_hit": ""
+      },
+      {
+        "lyrics": "It was my death you died<br>I am raised to life<br>Hallelujah, the lamb of God",
+        "target_time": "193000",
+        "time_hit": ""
+      },
+      {
+        "lyrics": "The Lamb of God, in my place<br>Your blood poured out, my sin erased",
+        "target_time": "206000",
+        "time_hit": ""
+      },
+      {
+        "lyrics": "It was my death you died<br>I am raised to life<br>Hallelujah, the lamb of God",
+        "target_time": "220000",
+        "time_hit": ""
+      },
+      {
+        "lyrics": "",
+        "target_time": "235000",
         "time_hit": ""
       }
     ]
