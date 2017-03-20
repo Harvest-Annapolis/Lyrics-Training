@@ -117,6 +117,17 @@
         console.log("hrre");
         alert(
             "Okay, this help dialog is in the works, so bear with me.\n" +
+
+            "Hey, welcome to the song builder!  This is here so other people besides Tyler can build those obnoxious song JSONs.\n" +
+            "So, let's talk about how this thing works. Some hints, tips, and tricks, as it were.\n" +
+            "So, here's how this is gonna work, you fill in the fields, and when you hit \"Generate\", it will give you a JSON to send me.\n" +
+            "(Note: these aren't saved anywhere, and will be lost on refresh, so don't be a fool and accidently refresh the page)\n" +
+            "In the lyrics box, you can use [blank] for a blank slide, and 2 enters is a slide break.  The slides will appear on the right, and you can put a time in next to them.\n" +
+            "Note: Please <strong>end your lyrics with a blank slide</strong>.  This is important because we do grade on if you are clearing the lyrics away at the right time.  Thanks!\n" +
+            "Note: The time MUST be in the format <strong>minutes:seconds.milliseconds</strong>.  I.e. 3:24.521 (3 minutes, 24.521 seconds (no more than 3 digits after the dot please)).\n" +
+            "Note: The time corresponds to <strong>when that slide should START displaying</strong>.  E.g. the first slide should have a 20 second time or so (whenever the vocals start).\n" +
+            "Hit Generate at any time.  It won't break anything or anything.  Don't be nervous.  It's gonna just give you a JSON string to send to me, which I can add to the system.\n" +
+
             "Note: The page loads with an example already filled out, so if you have questions, it might help to open the page in another tab and look at the example.\n\n" +
 
             "1)  End your lyrics with a blank slide (by using [blank]).\n\n" +

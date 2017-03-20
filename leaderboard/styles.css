@@ -1,5 +1,6 @@
 .board {
-    margin:0 20px;
+    margin:0 1.250em;
+    min-height: 85%;
 }
 
 .song_score {

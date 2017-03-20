@@ -1,15 +1,15 @@
 ﻿header {
-    height:75px;
+    height:4.688em;
     width:100%;
     position:fixed;
     background:white;
     z-index:100;
-    border-bottom:1px solid #150236;
+    border-bottom:0.063em solid #150236;
 }
 
 .banner_image{
-    height:54px;
-    margin: 10px 0;
+    height:3.375em;
+    margin: 0.625em 0;
 }
 
 .page{
@@ -19,5 +19,5 @@
 
 .content-area{
     background-color:white;
-    padding-top:80px
+    padding-top:5.000em
 }

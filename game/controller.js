@@ -201,7 +201,7 @@
     // song select menu
     function song_select() {
         lock_modal = true;
-        var output_html = '<label class="handicapped_area" for="handicapped_mode">Training mode&nbsp;<a id="handicapped_help">(<span style="border-bottom:1px dashed gray;">explanation</span>)</a>:&nbsp;&nbsp;&nbsp;&nbsp;<label><div class="onoffswitch"><input type="checkbox" name="onoffswitch" ' + (handicapped_on ? "checked" : "") + ' class="onoffswitch-checkbox" id="handicapped_mode"><label class="onoffswitch-label" for="handicapped_mode"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch"></span></label></div></label></label>';
+        var output_html = '<label class="handicapped_area" for="handicapped_mode">Training mode&nbsp;<a id="handicapped_help">(<span style="border-bottom:0.063em dashed gray;">explanation</span>)</a>:&nbsp;&nbsp;&nbsp;&nbsp;<label><div class="onoffswitch"><input type="checkbox" name="onoffswitch" ' + (handicapped_on ? "checked" : "") + ' class="onoffswitch-checkbox" id="handicapped_mode"><label class="onoffswitch-label" for="handicapped_mode"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch"></span></label></div></label></label>';
         $(songs).each(function (i, val) {
             var status = "✓";
             var color = "green"

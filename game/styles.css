@@ -1,16 +1,16 @@
 .main_area {
     position:relative;
     display:inline-block;
-    width:915px;
-    height:686px;
+    width:57.188em;
+    height:42.875em;
 }
 
 .lyric_area{
     background-image:url(../images/background.png);
     background-size:cover;
     position:absolute;
-    width:915px;
-    height:686px;
+    width:57.188em;
+    height:42.875em;
     display:inline-flex;
     justify-content:center;
     align-items:center;
@@ -21,12 +21,12 @@
     flex-wrap:wrap;
     justify-content:center;
     align-content:center;
-    padding-top:20px;
+    padding-top:1.250em;
 	min-height:100%;
 }
 
 #current_lyric{
-    font-size:40px;
+    font-size:2.500em;
     color:white;
     text-align:center;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
@@ -35,12 +35,12 @@
 .staging_area {
     position:relative;
     background:#052d49;
-    width:315px;
-    height:286px;
+    width:19.688em;
+    height:17.875em;
     display:inline-flex;
     justify-content:center;
     align-items:center;
-    margin: 30px;
+    margin: 1.875em;
 }
 
 #next_lyric{
@@ -51,9 +51,9 @@
 
 #slide_score{
     color:lightgreen;
-    font-size: 80px;
+    font-size: 5.000em;
     position: absolute;
-    top: 20px;
+    top: 0.250em;
     width: 100%;
     text-align: center;
 }
@@ -61,21 +61,21 @@
 
 #handicapped_display{
     color:yellow;
-    font-size: 50px;
+    font-size: 3.125em;
     position: absolute;
-    bottom: 60px;
-    left: 60px;
+    bottom: 3.750em;
+    left: 3.750em;
 }
 
 .song_select_button {
-	font-size:15px;
-    border: 1px solid #444;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+	font-size:0.938em;
+    border: 0.063em solid #444;
+    border-top-left-radius: 0.250em;
+    border-bottom-left-radius: 0.250em;
     width: 65%;
-    padding: 5px 10px;
+    padding: 0.313em 0.625em;
     display: inline-block;
-    margin-top: 10px;
+    margin-top: 0.625em;
 }
 .song_select_button:hover {
     background-color: #ddd;
@@ -83,115 +83,51 @@
 }
 
 .auto_play {
-	font-size:15px;
-    border: 1px solid #444;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
+	font-size:0.938em;
+    border: 0.063em solid #444;
+    border-top-right-radius: 0.250em;
+    border-bottom-right-radius: 0.250em;
     width: 20%;
-    padding: 5px 10px;
+    padding: 0.313em 0.625em;
     display: inline-block;
-    margin-top: 10px;
-    margin-left: -1px;
+    margin-top: 0.625em;
+    margin-left: -0.063em;
 }
 .auto_play:hover {
     background-color: #ddd;
     cursor:pointer;
 }
 
-
-
-/* Old, non-bootstrap modal stuff */
-/*
-.fullscreen {        
-    position: absolute;
-    width: 100%;
-    height: 105%;
-    align-items: center;
-    justify-content: center;
-    top: 0;
-
-    display:none; /* change to flex /
-}
-.fullscreen_background {
-    top: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: #999;
-    opacity:0.5;
-}
-
-
-.modal {
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    top: 25%;
-    width: 40%;
-    border: 2px solid black;
-    background-color: white;
-}
-
-.modal_body {
-    padding:0 12px 12px 12px;
-}
-
 .modal_text {
-    font-size:20px;
-    margin: 35px 24px 20px 24px;
-    max-height: 250px;
-    overflow-y: auto;
-}
-
-
-.x_button {
-    padding: 3px;
-    font-size: 30px;
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    right: 10px;
-}
-
-.close_button {
-    padding:3px;
-    cursor:pointer;
-}
-    
-*/
-
-
-
-.modal_text {
-    font-size:20px;
-    margin: 35px 24px 20px 24px;
-    max-height: 250px;
+    font-size:1.250em;
+    margin: 2.188em 1.500em 1.250em 1.500em;
+    max-height: 15.625em;
     overflow-y: auto;
 }
 
 
 .user_input {
-    font-size: 20px;
+    font-size: 1.250em;
 }
 .user_block {
-    padding: 5px 10px;
-    margin-top: 10px;
+    padding: 0.313em 0.625em;
+    margin-top: 0.625em;
     text-align: center;
 }
 .user_label {
-    font-size:21px;
+    font-size:1.313em;
 }
 .user_button {
-    padding:6px;
+    padding:0.375em;
     width:60%;
-    font-size:20px;
+    font-size:1.250em;
 }
 .user_button_wrapper {
     width:100%;
     padding:0;
     margin:0;
     text-align:center;
-    margin-top:10px
+    margin-top:0.625em
 }
 .leaderboard_wrapper {
     width:100%;
@@ -211,7 +147,7 @@
 
 .onoffswitch {
     display:inline-block;
-    position: relative; width: 90px;
+    position: relative; width: 5.625em;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
 .onoffswitch-checkbox {
@@ -219,7 +155,7 @@
 }
 .onoffswitch-label {
     display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 20px;
+    border: 0.125em solid #999999; border-radius: 1.250em;
     margin-bottom:0;
 }
 .onoffswitch-inner {
@@ -227,34 +163,34 @@
     transition: margin 0.3s ease-in 0s;
 }
 .onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
-    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    display: block; float: left; width: 50%; height: 1.875em; padding: 0; line-height: 1.875em;
+    font-size: 0.875em; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
     box-sizing: border-box;
 }
 .onoffswitch-inner:before {
     content: "ON";
-    padding-left: 10px;
+    padding-left: 0.625em;
     background-color: #34A7C1; color: #FFFFFF;
 }
 .onoffswitch-inner:after {
     content: "OFF";
-    padding-right: 10px;
+    padding-right: 0.625em;
     background-color: #EEEEEE; color: #999999;
     text-align: right;
 }
 .onoffswitch-switch {
-    display: block; width: 18px; margin: 6px;
+    display: block; width: 1.125em; margin: 0.375em;
     background: #FFFFFF;
     position: absolute; top: 0; bottom: 0;
-    right: 56px;
-    border: 2px solid #999999; border-radius: 20px;
+    right: 3.500em;
+    border: 0.125em solid #999999; border-radius: 1.250em;
     transition: all 0.3s ease-in 0s; 
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
     margin-left: 0;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px; 
+    right: 0; 
 }
 /* Toggle css end */
 
@@ -274,15 +210,9 @@
         height:100%;
         position:relative;
     }
-    #slide_score, #handicapped_display {
-        font-size:35px;
-    }
-    .song_select_button, .auto_play {
-        font-size:12px;
-    }
 
     #handicapped_display {        
         bottom: 0;
-        left: 10px;
+        left: 0.625em;
     }
 }
