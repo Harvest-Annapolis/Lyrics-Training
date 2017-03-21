@@ -23,12 +23,15 @@
     max-width:100%;
 }
 
+#slide_area {
+    text-align:center;
+}
+
 .staging_area {
     background:black;
     width:19.688em;
     height:17.875em;
-    margin-left:1.875em;
-    margin-bottom:0.625em;
+    margin:0.625em 1.875em;
     display:inline-flex;
     justify-content:center;
     align-items:center;
