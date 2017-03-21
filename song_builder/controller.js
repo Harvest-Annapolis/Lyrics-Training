@@ -4,6 +4,7 @@
             "Id": "",
             "title": "",
             "song_file": "",
+            "youtube_url": "",
             "high_score": "",
             "slides": [
               {
@@ -151,8 +152,10 @@
 
         evaluate_lyrics();
 
+        new_song.Id = guid();
+        new_song.song_file = $("#title").val().toLowerCase().replace(/[^a-z]/g, '') + ".mp3";
         new_song.title = $("#title").val();
-        new_song.song_file = $("#url").val();
+        new_song.youtube_url = $("#url").val();
         new_song.slides = [];
         slides = $(".next_lyric").map(function (i, val) { return $(val).html(); });
         times = $(".slide_time").map(function (i, val) { return $(val).val(); });
@@ -189,11 +192,10 @@
         if (err_count == 0)
         {
 
-            var db_writer = firebase.database().ref('/submissions/' + $("#title").val());
+            var db_writer = firebase.database().ref('/submissions/');
             db_writer.once('value').then(function (snapshot) {
-                db_writer.set({
-                    json: JSON.stringify(new_song)
-                });
+                eval("var store = { \"" + $("#title").val() + "\" : \"" + JSON.stringify(new_song).replace(/\"/g, "\\\"") + "\" }")
+                db_writer.update(store);
                 $("#jsonificated").text(JSON.stringify(new_song))
                 $("#success_modal").modal();
             });
@@ -213,6 +215,16 @@
         } else {
             return (str + pad).substring(0, pad.length);
         }
+    }
+
+    function guid() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+              .toString(16)
+              .substring(1);
+        }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+          s4() + '-' + s4() + s4() + s4();
     }
 
     var lyrics_placeholder = "";

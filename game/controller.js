@@ -28,7 +28,7 @@
     var queue_modal = function(){};
 
     // User Stuff
-    my_modal('<div class="input-group user_block"><label class="input-group-addon user_label" for="username">Username: </label><input type="text" autofocus class="form-control user_input" id="username" /></div><div class="user_button_wrapper"><input type="button" value="Log In" class="btn btn-primary user_button" /></div><div class="leaderboard_wrapper"><br />--- OR ---<br /><br /><a target="_blank" href="leaderboard">Go to the Leaderboard</a></div>');
+    my_modal('<div class="input-group user_block"><label class="input-group-addon user_label" for="username">Username: </label><input type="text" autofocus class="form-control user_input" id="username" /></div><div class="user_button_wrapper"><input type="button" value="Log In" class="btn btn-primary user_button" /></div><div class="leaderboard_wrapper"><br />--- OR ---<br /><br /><a target="_blank" href="../leaderboard">Go to the Leaderboard</a></div>');
     setTimeout(function () { $("#username").focus(); }, 500);
     $(".modal").on("click", ".user_button", function () {
         if ($(".user_button").val() == "") {
@@ -47,8 +47,8 @@
 
     // load data
     function load_song_and_user_info() {
-        $.getJSON("../songs.json", function (data) {
-            songs = data;
+        populate_song_list().then(function () {
+            songs = song_list;
             get_scores().then(function (snapshot) {
                 $(snapshot.val()).each(function (i, val) {
                     if (val != undefined) {
@@ -211,6 +211,17 @@
             output_html += '<a class="song_select_button" data-id="' + val.Id + '">' + val.title + '<span data-id="' + val.Id + '" style="float:right;color:' + color + ';">' + val.high_score + "&nbsp;&nbsp;" + status + '</span></a><a class="auto_play" data-id="' + val.Id + '">auto-play</a>'
         });
         my_modal(output_html);
+
+        $(songs).each(function (i, val) {
+            urlExists("../songs/" + val.song_file, function (exists) {
+                if (!exists) {
+                    $(".song_select_button[data-id='" + val.Id + "']").addClass("song_not_found")
+                    $(".song_select_button[data-id='" + val.Id + "']").removeClass("song_select_button")
+                    $(".auto_play[data-id='" + val.Id + "']").addClass("song_not_found_auto")
+                    $(".auto_play[data-id='" + val.Id + "']").removeClass("auto_play")
+                }
+            });
+        });
     }
 
     $(".modal").on("change", "#handicapped_mode", function () {
@@ -279,6 +290,19 @@
         return minutes + ":" + seconds + "." + milliseconds;
     }
 
+    function urlExists(url, callback) {
+        $.ajax({
+            type: 'HEAD',
+            url: url,
+            success: function () {
+                callback(true);
+            },
+            error: function () {
+                callback(false);
+            }
+        });
+    }
+
 
     //*********************************************************************************************
     //
@@ -306,5 +330,17 @@
     function get_scores() {
         var db_songlist = firebase.database().ref('/user/' + user + '/songs/');
         return db_songlist.once('value');
+    }
+
+    //Fetch the song list from the database
+    var song_list = [];
+    function populate_song_list() {
+        var songs = firebase.database().ref('/submissions');
+        return songs.once("value").then(function (snapshot) {
+            song_data = snapshot.val();
+            for (var id in song_data) {
+                song_list.push($.parseJSON(song_data[id]));
+            }
+        });
     }
 });

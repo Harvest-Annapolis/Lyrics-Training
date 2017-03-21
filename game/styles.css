@@ -82,6 +82,22 @@
     cursor:pointer;
 }
 
+.song_not_found {
+	font-size:0.938em;
+    border: 0.063em solid #ccc;
+    border-top-left-radius: 0.250em;
+    border-bottom-left-radius: 0.250em;
+    width: 65%;
+    padding: 0.313em 0.625em;
+    display: inline-block;
+    margin-top: 0.625em;
+    color: #ccc;
+}
+.song_not_found:hover {
+    color: #ccc;
+    text-decoration:none;
+}
+
 .auto_play {
 	font-size:0.938em;
     border: 0.063em solid #444;
@@ -96,6 +112,23 @@
 .auto_play:hover {
     background-color: #ddd;
     cursor:pointer;
+}
+
+.song_not_found_auto {
+	font-size:0.938em;
+    border: 0.063em solid #ccc;
+    border-top-right-radius: 0.250em;
+    border-bottom-right-radius: 0.250em;
+    width: 20%;
+    padding: 0.313em 0.625em;
+    display: inline-block;
+    margin-top: 0.625em;
+    margin-left: -0.063em;
+    color: #ccc;
+}
+.song_not_found_auto:hover {
+    color: #ccc;
+    text-decoration:none;
 }
 
 .modal_text {

@@ -6,14 +6,13 @@
         if (snapshot.val() != null) {
             // Get the song list
             var user_data = snapshot.val();
-            $.getJSON("../songs.json", function (data) {
+            populate_song_list().then(function () {
+                data = song_list;
                 count = 0;
                 // Start the area
                 var html_fill = '<div class="row">';
                 // For each song
                 $(data).each(function (i, val) {
-                    // Song Header
-                    html_fill += '<div class="col-xs-3 song_score"><h3>' + val.title + '</h3><ul class="list-group">';
                     var song_users = []
                     // Pull out the relevant users for sorting and display
                     for (var val2 in user_data) {
@@ -23,12 +22,20 @@
                     }
                     // Sort the users
                     var songs_sorted = $(song_users.sort(function (a, b) { if (a.score > b.score) { return 1; } else if (a.score < b.score) { return -1; } else { return 0 } }));
+
+
+                    // Song Header
+                    html_fill += '<div class="col-xs-3 song_score"><h3>' + val.title + '</h3><ul class="list-group">';
+
                     // Display the users
                     rank = 1;
                     songs_sorted.each(function (i2, val2) {
                         html_fill += '<li class="list-group-item"><span class="badge">' + val2.score + '</span>' + ordinal_suffix_of(rank) + ") " + val2.name + '</li>';
                         rank++;
                     });
+                    if (rank == 1) {
+                        html_fill += '<li class="list-group-item">No scores on record</li>';
+                    }
 
                     html_fill += '</ul></div>'
                     count++;
@@ -55,5 +62,16 @@
             return i + "rd";
         }
         return i + "th";
+    }
+
+    var song_list = [];
+    function populate_song_list() {
+        var songs = firebase.database().ref('/submissions');
+        return songs.once("value").then(function (snapshot) {
+            song_data = snapshot.val();
+            for (var id in song_data) {
+                song_list.push($.parseJSON(song_data[id]));
+            }
+        });
     }
 });
