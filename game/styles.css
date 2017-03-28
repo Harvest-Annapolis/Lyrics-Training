@@ -63,8 +63,8 @@
     color:yellow;
     font-size: 3.125em;
     position: absolute;
-    bottom: 3.750em;
-    left: 3.750em;
+    bottom: 0.750em;
+    left: 1.250em;
 }
 
 .song_select_button {
