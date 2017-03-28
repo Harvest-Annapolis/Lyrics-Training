@@ -50,12 +50,13 @@
         populate_song_list().then(function () {
             songs = song_list;
             get_scores().then(function (snapshot) {
-                $(snapshot.val()).each(function (i, val) {
+                var scrs = snapshot.val()
+                for(var val in scrs) {
                     if (val != undefined) {
-                        some_song = songs.filter(function (val2, i2) { return val2.Id == i; })[0];
-                        some_song.high_score = val.score;
+                        some_song = songs.filter(function (val2, i2) { return val2.Id == val; })[0];
+                        some_song.high_score = scrs[val].score;
                     }
-                });
+                }
                 song_select();
             });
         });
@@ -213,14 +214,12 @@
         my_modal(output_html);
 
         $(songs).each(function (i, val) {
-            urlExists("../songs/" + val.song_file, function (exists) {
-                if (!exists) {
-                    $(".song_select_button[data-id='" + val.Id + "']").addClass("song_not_found")
-                    $(".song_select_button[data-id='" + val.Id + "']").removeClass("song_select_button")
-                    $(".auto_play[data-id='" + val.Id + "']").addClass("song_not_found_auto")
-                    $(".auto_play[data-id='" + val.Id + "']").removeClass("auto_play")
-                }
-            });
+            if (!val.Active) {
+                $(".song_select_button[data-id='" + val.Id + "']").addClass("song_not_found")
+                $(".song_select_button[data-id='" + val.Id + "']").removeClass("song_select_button")
+                $(".auto_play[data-id='" + val.Id + "']").addClass("song_not_found_auto")
+                $(".auto_play[data-id='" + val.Id + "']").removeClass("auto_play")
+            }
         });
     }
 
@@ -290,19 +289,6 @@
         return minutes + ":" + seconds + "." + milliseconds;
     }
 
-    function urlExists(url, callback) {
-        $.ajax({
-            type: 'HEAD',
-            url: url,
-            success: function () {
-                callback(true);
-            },
-            error: function () {
-                callback(false);
-            }
-        });
-    }
-
 
     //*********************************************************************************************
     //
@@ -339,7 +325,7 @@
         return songs.once("value").then(function (snapshot) {
             song_data = snapshot.val();
             for (var id in song_data) {
-                song_list.push($.parseJSON(song_data[id]));
+                song_list.push(song_data[id]);
             }
         });
     }

@@ -1,6 +1,7 @@
 ﻿$(function () {
     var new_song =
         {
+            "Active": false,
             "Id": "",
             "title": "",
             "song_file": "",
@@ -192,10 +193,9 @@
         if (err_count == 0)
         {
 
-            var db_writer = firebase.database().ref('/submissions/');
+            var db_writer = firebase.database().ref('/submissions/' + $("#title").val());
             db_writer.once('value').then(function (snapshot) {
-                eval("var store = { \"" + $("#title").val() + "\" : \"" + JSON.stringify(new_song).replace(/\"/g, "\\\"") + "\" }")
-                db_writer.update(store);
+                db_writer.set(new_song);
                 $("#jsonificated").text(JSON.stringify(new_song))
                 $("#success_modal").modal();
             });

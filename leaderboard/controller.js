@@ -70,7 +70,7 @@
         return songs.once("value").then(function (snapshot) {
             song_data = snapshot.val();
             for (var id in song_data) {
-                song_list.push($.parseJSON(song_data[id]));
+                song_list.push(song_data[id]);
             }
         });
     }
