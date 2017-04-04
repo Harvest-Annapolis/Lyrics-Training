@@ -1,9 +1,9 @@
 ﻿$(function () {
     populate_song_list().then(function () {
-        new_html = '<table class="table table-hover"><thead><tr><th>Id</th><th>Title</th><th>URL</th></tr></thead><tbody>'
+        new_html = '<table class="table table-hover"><thead><tr><th>Title</th><th>Id</th><th>URL</th></tr></thead><tbody>'
         for (var s in song_list) {
             i = song_list[s];
-            new_html += "<tr class='edit_me' data-id='" + i.Id + "'><td>" + i.Id + "</td><td>" + i.title + "</td><td>" + i.youtube_url + "</td></tr>"
+            new_html += "<tr class='edit_me' data-id='" + i.Id + "'><td>" + i.title + "</td><td>" + i.Id + "</td><td>" + i.youtube_url + "</td></tr>"
         }
         new_html += '</tbody></table>'
         $("#songs").html(new_html);
