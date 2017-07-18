@@ -1,9 +1,13 @@
-﻿$(function () {
+var onYouTubeIframeAPIReady;
+var onPlayerReady;
+var effMe;
+$(function () {
     // Game Control variables
     var handicapped_on = false;
     var handicapped_interval = null;
     var autoplay_on = false;
     var autoplay_interval = null;
+    var videoplay_on = true;
 
     // Song list variables
     var songs = "";
@@ -87,23 +91,38 @@
         $("#current_lyric").html("");
 
         slides = song_json.slides;
-        song.src = "../songs/" + song_json.song_file;
-        song.addEventListener("canplaythrough", function () {
-            $("#next_lyric").html("Next<br />=======================<br />" + slides[0].lyrics);
-            song.play();
-            start_time = new Date();
+        if(videoplay_on) {
+            $("#video_player").css("display", "inline-flex");
+            prepYouTubeVideo(song_json.youtube_url);
+            
+            //note, video launch from this point is handled in the youtube section.  Sorry that that's an unintuitive mess.
+        }
+        else {       
+            $("#video_player").css("display", "none");  
+            song.src = "../songs/" + song_json.song_file;
+            song.addEventListener("canplaythrough", function () {
+                $("#next_lyric").html("Next<br />=======================<br />" + slides[0].lyrics);
+                song.play();
+                start_time = new Date();
 
-            if (handicapped_on && !autoplay_on) {
-                clearInterval(handicapped_interval);
-                handicapped_interval = setInterval(render_handicapped, 100);
-            }
-        }, true);
-        song.load();
+                if (handicapped_on && !autoplay_on) {
+                    clearInterval(handicapped_interval);
+                    handicapped_interval = setInterval(render_handicapped, 100);
+                }
+            }, true);
+            song.load();   
+        }
     }
 
     // Progresses slides after load
     function advance_slide() {
-        slides[next_slide].time_hit = (new Date() - start_time);
+        
+        if(videoplay_on) {
+            slides[next_slide].time_hit = toplay.getCurrentTime() * 1000;
+        }
+        else {
+            slides[next_slide].time_hit = (new Date() - start_time);
+        }
         alert_score(slides[next_slide].target_time, slides[next_slide].time_hit)
 
         if ((next_slide + 1) < slides.length) {
@@ -203,8 +222,11 @@
     function song_select() {
         lock_modal = true;
         var output_html = '<label class="handicapped_area" for="handicapped_mode">Training mode&nbsp;<a id="handicapped_help">(<span style="border-bottom:0.063em dashed gray;">explanation</span>)</a>:&nbsp;&nbsp;&nbsp;&nbsp;<label><div class="onoffswitch"><input type="checkbox" name="onoffswitch" ' + (handicapped_on ? "checked" : "") + ' class="onoffswitch-checkbox" id="handicapped_mode"><label class="onoffswitch-label" for="handicapped_mode"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch"></span></label></div></label></label>';
+        
+        output_html += '<label class="videoplay_area" for="videoplay_mode">Include video player:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><div class="onoffswitch"><input type="checkbox" name="onoffswitch" ' + (videoplay_on ? "checked" : "") + ' class="onoffswitch-checkbox" id="videoplay_mode"><label class="onoffswitch-label" for="videoplay_mode"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch"></span></label></div></label></label>';
+        
         $(songs).each(function (i, val) {
-            var status = "✓";
+            var status = "<span class='glyphicon glyphicon-ok' aria-hidden='true'></span>";
             var color = "green"
             if (val.high_score == "") { status = ""; }
             else if (val.high_score > 1) { color = "red"; status = ""; }
@@ -225,6 +247,9 @@
 
     $(".modal").on("change", "#handicapped_mode", function () {
         handicapped_on = $("#handicapped_mode").prop("checked");
+    });
+    $(".modal").on("change", "#videoplay_mode", function () {
+        videoplay_on = $("#videoplay_mode").prop("checked");
     });
     $(".modal").on("click", "#handicapped_help", function () {
         alert("If you turn on Training Mode, you will see a timer that indicates when you should hit the next slide.\n\nNote: When in training mode, your score *will not* be saved.  You can't cheat your way onto the leaderboard.  Not on my watch.");
@@ -288,6 +313,76 @@
 
         return minutes + ":" + seconds + "." + milliseconds;
     }
+    
+    
+    
+    
+    
+    
+
+    //*********************************************************************************************
+    //
+    //  YouTube functions.  
+    //
+    //*********************************************************************************************
+    
+    // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      var youtube_ready = false;
+      var canplay = false;
+      var toplay = null;
+    
+      onYouTubeIframeAPIReady = function() {
+          youtube_ready = true;
+      }
+    
+      function prepYouTubeVideo(url) {     
+        while(!youtube_ready){}
+          
+        $("#video_player").html("<div id='player'></div>");
+        canplay = false;
+        toplay = null;
+          
+          console.log($("#video_player").css("height").split("px")[0].split(".")[0])
+          console.log($("#video_player").css("width").split("px")[0].split(".")[0])
+          console.log(url.split("v=")[1].split("&")[0])
+          
+        player = new YT.Player('player', {
+          height: $("#video_player").css("height").split("px")[0].split(".")[0],
+          width: $("#video_player").css("width").split("px")[0].split(".")[0],
+          videoId: url.split("v=")[1].split("&")[0],
+          events: {
+            'onReady': onPlayerReady
+          }
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      onPlayerReady = function(event) {
+          canplay = true;
+          toplay = event.target;
+          startYouTubePlay();
+      }      
+
+      function startYouTubePlay() {
+         $("#next_lyric").html("Next<br />=======================<br />" + slides[0].lyrics);
+         toplay.playVideo();
+
+         start_time = new Date();
+
+         if (handicapped_on && !autoplay_on) {
+             clearInterval(handicapped_interval);
+             handicapped_interval = setInterval(render_handicapped, 100);
+         }
+      }
 
 
     //*********************************************************************************************

@@ -32,7 +32,22 @@
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
+.right_column_wrapper {
+    width:19.688em;
+}
+
 .staging_area {
+    position:relative;
+    background:#052d49;
+    width:19.688em;
+    height:17.875em;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    margin: 1.875em;
+}
+
+#video_player {
     position:relative;
     background:#052d49;
     width:19.688em;
@@ -171,11 +186,10 @@
 
 
 /* Toggle css start */
-.handicapped_area{
+.handicapped_area, .videoplay_area{
     display:flex;
-}
-#handicapped_help{
     cursor:pointer;
+    align-items: center;
 }
 
 .onoffswitch {
