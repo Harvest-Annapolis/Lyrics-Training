@@ -92,13 +92,11 @@ $(function () {
 
         slides = song_json.slides;
         if(videoplay_on) {
-            $("#video_player").css("display", "inline-flex");
             prepYouTubeVideo(song_json.youtube_url);
             
             //note, video launch from this point is handled in the youtube section.  Sorry that that's an unintuitive mess.
         }
         else {       
-            $("#video_player").css("display", "none");  
             song.src = "../songs/" + song_json.song_file;
             song.addEventListener("canplaythrough", function () {
                 $("#next_lyric").html("Next<br />=======================<br />" + slides[0].lyrics);
@@ -250,6 +248,12 @@ $(function () {
     });
     $(".modal").on("change", "#videoplay_mode", function () {
         videoplay_on = $("#videoplay_mode").prop("checked");
+        if(videoplay_on){
+            $("#video_player").css("display", "inline-flex");
+        }
+        else {
+            $("#video_player").css("display", "none");
+        }
     });
     $(".modal").on("click", "#handicapped_help", function () {
         alert("If you turn on Training Mode, you will see a timer that indicates when you should hit the next slide.\n\nNote: When in training mode, your score *will not* be saved.  You can't cheat your way onto the leaderboard.  Not on my watch.");
