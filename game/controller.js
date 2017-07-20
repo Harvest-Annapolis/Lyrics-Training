@@ -1,6 +1,5 @@
 var onYouTubeIframeAPIReady;
 var onPlayerReady;
-var effMe;
 $(function () {
     // Game Control variables
     var handicapped_on = false;

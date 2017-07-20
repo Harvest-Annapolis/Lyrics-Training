@@ -1,0 +1,265 @@
+.main_area {
+    position:relative;
+    display:inline-block;
+    width:57.188em;
+    height:42.875em;
+}
+
+.lyric_area{
+    background-image:url(../../images/background.png);
+    background-size:cover;
+    position:absolute;
+    width:57.188em;
+    height:42.875em;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.song_zone {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-content:center;
+    padding-top:1.250em;
+	min-height:100%;
+}
+
+#current_lyric{
+    font-size:2.500em;
+    color:white;
+    text-align:center;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+.right_column_wrapper {
+    width:19.688em;
+}
+
+.staging_area {
+    position:relative;
+    background:#052d49;
+    width:19.688em;
+    height:17.875em;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    margin: 1.875em;
+}
+
+#video_player {
+    position:relative;
+    background:#052d49;
+    width:19.688em;
+    height:17.875em;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    margin: 1.875em;
+}
+
+#next_lyric{
+    color:white;
+    text-align:center;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+#slide_score{
+    color:lightgreen;
+    font-size: 5.000em;
+    position: absolute;
+    top: 0.250em;
+    width: 100%;
+    text-align: center;
+}
+
+
+#handicapped_display{
+    color:yellow;
+    font-size: 3.125em;
+    position: absolute;
+    bottom: 0.750em;
+    left: 1.250em;
+}
+
+.song_select_button {
+	font-size:0.938em;
+    border: 0.063em solid #444;
+    border-top-left-radius: 0.250em;
+    border-bottom-left-radius: 0.250em;
+    width: 65%;
+    padding: 0.313em 0.625em;
+    display: inline-block;
+    margin-top: 0.625em;
+}
+.song_select_button:hover {
+    background-color: #ddd;
+    cursor:pointer;
+}
+
+.song_not_found {
+	font-size:0.938em;
+    border: 0.063em solid #ccc;
+    border-top-left-radius: 0.250em;
+    border-bottom-left-radius: 0.250em;
+    width: 65%;
+    padding: 0.313em 0.625em;
+    display: inline-block;
+    margin-top: 0.625em;
+    color: #ccc;
+}
+.song_not_found:hover {
+    color: #ccc;
+    text-decoration:none;
+}
+
+.auto_play {
+	font-size:0.938em;
+    border: 0.063em solid #444;
+    border-top-right-radius: 0.250em;
+    border-bottom-right-radius: 0.250em;
+    width: 20%;
+    padding: 0.313em 0.625em;
+    display: inline-block;
+    margin-top: 0.625em;
+    margin-left: -0.063em;
+}
+.auto_play:hover {
+    background-color: #ddd;
+    cursor:pointer;
+}
+
+.song_not_found_auto {
+	font-size:0.938em;
+    border: 0.063em solid #ccc;
+    border-top-right-radius: 0.250em;
+    border-bottom-right-radius: 0.250em;
+    width: 20%;
+    padding: 0.313em 0.625em;
+    display: inline-block;
+    margin-top: 0.625em;
+    margin-left: -0.063em;
+    color: #ccc;
+}
+.song_not_found_auto:hover {
+    color: #ccc;
+    text-decoration:none;
+}
+
+.modal_text {
+    font-size:1.250em;
+    margin: 2.188em 1.500em 1.250em 1.500em;
+    max-height: 15.625em;
+    overflow-y: auto;
+}
+
+
+.user_input {
+    font-size: 1.250em;
+}
+.user_block {
+    padding: 0.313em 0.625em;
+    margin-top: 0.625em;
+    text-align: center;
+}
+.user_label {
+    font-size:1.313em;
+}
+.user_button {
+    padding:0.375em;
+    width:60%;
+    font-size:1.250em;
+}
+.user_button_wrapper {
+    width:100%;
+    padding:0;
+    margin:0;
+    text-align:center;
+    margin-top:0.625em
+}
+.leaderboard_wrapper {
+    width:100%;
+    padding:0;
+    margin:0;
+    text-align:center;
+}
+
+
+/* Toggle css start */
+.handicapped_area, .videoplay_area{
+    display:flex;
+    cursor:pointer;
+    align-items: center;
+}
+
+.onoffswitch {
+    display:inline-block;
+    position: relative; width: 5.625em;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 0.125em solid #999999; border-radius: 1.250em;
+    margin-bottom:0;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 1.875em; padding: 0; line-height: 1.875em;
+    font-size: 0.875em; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 0.625em;
+    background-color: #34A7C1; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 0.625em;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 1.125em; margin: 0.375em;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 3.500em;
+    border: 0.125em solid #999999; border-radius: 1.250em;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0; 
+}
+/* Toggle css end */
+
+
+
+
+
+
+@media (max-width: 992px)
+{
+    .standard_page {
+        width:92%;
+        height:69%;
+    }
+    .lyric_area, .main_area {
+        width:100%;
+        height:100%;
+        position:relative;
+    }
+
+    #handicapped_display {        
+        bottom: 0;
+        left: 0.625em;
+    }
+}

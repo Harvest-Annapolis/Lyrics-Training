@@ -1,9 +1,11 @@
-﻿$(function () {
+$(function () {
     populate_song_list().then(function () {
-        new_html = '<table class="table table-hover"><thead><tr><th>Title</th><th>Id</th><th>URL</th></tr></thead><tbody>'
+        new_html = '<table class="table table-hover"><thead><tr><th>Title</th><th>Id</th><th>URL</th><th></th></tr></thead><tbody>'
         for (var s in song_list) {
             i = song_list[s];
-            new_html += "<tr class='edit_me' data-id='" + i.Id + "'><td>" + i.title + "</td><td>" + i.Id + "</td><td>" + i.youtube_url + "</td></tr>"
+            newrl = window.location.href + "/trainer/index.html?id=" + i.Id
+            newrl = newrl.replace(/\/\//g, "/").replace("p:/", "p://");
+            new_html += "<tr class='edit_me' data-id='" + i.Id + "'><td>" + i.title + "</td><td>" + i.Id + "</td><td>" + i.youtube_url + "</td><td><a href='" + newrl + "' class='btn btn-primary'>Train this song</a></td></tr>"
         }
         new_html += '</tbody></table>'
         $("#songs").html(new_html);
