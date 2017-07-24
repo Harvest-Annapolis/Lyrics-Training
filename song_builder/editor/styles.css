@@ -11,7 +11,7 @@
     z-index:10;
 }
 
-.help_btn {    
+.help_btn, .import_btn {    
     position: fixed;
     top: 2.825em;
     left: 1.250em;
@@ -25,6 +25,10 @@
 
 #slide_area {
     text-align:center;
+}
+
+#train_song {
+    display:none;
 }
 
 .staging_area {
@@ -58,12 +62,28 @@
     border-radius:0.250em;
 }
 
+
+.arrangment_select_button {
+	font-size:0.938em;
+    border: 0.063em solid #444;
+    border-top-left-radius: 0.250em;
+    border-bottom-left-radius: 0.250em;
+    width: 65%;
+    padding: 0.313em 0.625em;
+    display: inline-block;
+    margin-top: 0.625em;
+}
+.arrangment_select_button:hover {
+    background-color: #ddd;
+    cursor:pointer;
+}
+
 @media (min-width: 992px)
 {
     
-    .help_btn {
+    .help_btn, .import_btn {
         margin-left: 0.5em;
-        left: 8.33333333%;
+        left:  8.33333333%;
     }
     .generate_btn {
         margin-right: 0.5em;

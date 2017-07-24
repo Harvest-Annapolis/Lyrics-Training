@@ -1,4 +1,4 @@
-﻿$(function () {
+$(function () {
     var new_song =
         {
             "Active": false,
@@ -119,10 +119,14 @@
             }
         });
     }
+    
+    $('[data-dismiss="modal"]').on("click", function() {
+        $("#train_song").css("display", "none")
+        $("#generate").css("margin-right", "0.5em")
+    })
 
     
     $("#lyrics_help").on("click", function () {
-        console.log("hrre");
         alert(
             "Okay, this help dialog is in the works, so bear with me.\n" +
 
@@ -148,12 +152,80 @@
             "I'll let you know, then put the answer up here for other people, so please ask questions.  I want to make this better for everyone."
         );
     });
+        
+    $("#song_train").attr("href", window.location.href.replace("editor", "trainer"))
+    $("#train_song").on("click", function() {
+        $(".slide_time").each(function(i, val){ $(val).val("0:00.0"); });
+        $('#info_modal').modal('hide');
+        $("#generate").click();
+    });
 
+    $("#import").on("click", function() {
+        $("#info_modal .modal-title").html("Import");
+        $("#info_modal .modal-body").html("<form><div class='form-group'><label for='prosix_file'>Select a .pro6 file: </label><input type='file' id='prosix_file' /></div></form>");
+        $("#generate").css("margin-right", "1em")
+        $("#info_modal").modal(); 
+        
+        $("#prosix_file").on("change", function(evt) {            
+            var files = evt.target.files; // FileList object
+
+            // use the 1st file from the list
+            f = files[0];
+
+            var reader = new FileReader();
+
+            // Closure to capture the file information.
+            reader.onload = (function(theFile) {
+                return function(e) {
+                    parseProSix(e.target.result)
+                };
+            })(f);
+
+            // Read in the image file as a data URL.
+            reader.readAsText(f);
+        });
+    });
+    
+    $(".modal-body").on("click", ".arrangment_select_button", function(e) {
+        var arr = arrangements.filter(function(i, val) { return val.id == $(e.target).data("id") })[0];
+        var output = ""
+        $(arr.groups).each(function(i,val){
+            var test = $(groups).filter(function(i2, val2) { return val2.id == val })[0]
+            if(test){
+                output += test.slides + "\n\n"
+            }
+        });
+        output += "[blank]"
+        $("#lyrics").val(output)
+        $("#title").val(title)
+        
+        $('#info_modal').modal('hide');
+        $("#train_song").css("display", "none")
+        $("#generate").css("margin-right", "0.5em")
+        
+        evaluate_lyrics();
+    });
+    
     $("#generate").on("click", function () {
         var unfilled = $("input,textarea").filter(function (i, val) { return $(val).val() == "" });
         if (unfilled.length > 0) {
             unfilled.each(function (i, val) { $(val).addClass("input_error") });
-            alert("Please fill out the whole form.  Thanks.  Jerk.");
+            
+            var just_times = $("input:not(.slide_time),textarea").filter(function (i, val) { return $(val).val() == "" });
+            if(just_times.length > 0){
+                $("#info_modal .modal-title").html("Error");
+                $("#info_modal .modal-body").html("Please fill out the whole form.  Thanks.  Jerk.");
+                $("#generate").css("margin-right", "1em")
+                $("#info_modal").modal();                
+            }
+            else {                
+                $("#train_song").css("display", "inline")
+                $("#info_modal .modal-title").html("Error");
+                $("#info_modal .modal-body").html("I see you didn't fill in the slide times.  If you're really sure that everything matches up with your YouTube video (and if you're sure you have a [blank] at the end), you can go straight to training the song to populate those times.  Otherwise, hit the close button and fix your crap.");
+                $("#generate").css("margin-right", "1em")
+                $("#info_modal").modal();
+            }
+            
             return;
         }
 
@@ -203,12 +275,16 @@
             db_writer.once('value').then(function (snapshot) {
                 db_writer.set(new_song);
                 $("#jsonificated").text(JSON.stringify(new_song))
+                $("#generate").css("margin-right", "1em")
                 $("#success_modal").modal();
             });
         }
         else
         {
-            alert(err_count + " of your times are formatted poorly.  Please double check those and make sure they all conform to mm:ss.mmm.\n\nNote: the first symbol is a colon, and the second is a period.  Make sure you didn't do colon-colon or something.  Note, you *have* to have both in your time (though you can just put a zero after the period (e.g. 1:00.0 is a valid time)).");
+            $("#info_modal .modal-title").html("Error");
+            $("#info_modal .modal-body").html(err_count + " of your times are formatted poorly.  Please double check those and make sure they all conform to mm:ss.mmm.\n\nNote: the first symbol is a colon, and the second is a period.  Make sure you didn't do colon-colon or something.  Note, you *have* to have both in your time (though you can just put a zero after the period (e.g. 1:00.0 is a valid time)).");
+            $("#generate").css("margin-right", "1em")
+            $("#info_modal").modal();
         }
     });
 
@@ -239,6 +315,46 @@
 
 
         });
+    }
+    
+    var groups = {}
+    var arrangements = {}
+    var title = ""
+    function parseProSix(data) {
+        var xml = $($.parseXML(data));
+
+        title = xml[0].documentElement.attributes["CCLISongTitle"].value
+        
+        var no_repeats = {};
+        arrangements = $(xml.children().children()[2].children).map(function(i,val) { 
+            return { 
+                id: val.attributes.uuid.nodeValue, 
+                name: val.attributes.name.nodeValue, 
+                groups: $(val.children[0].children).map(function(inn, vnn) { 
+                    return vnn.innerHTML }) 
+            }
+        }).filter(function(i, val){ var ret = no_repeats[val.name] == undefined; no_repeats[val.name] = i; return ret; });
+        
+        groups = $(xml.children().children()[1].children).map(function(i, val) {
+            return {
+                id: val.attributes.uuid.nodeValue,
+                name: val.attributes.name.nodeValue,
+                slides: $($(val).find("NSString")).map(function(i2, val2) {
+                    var tes = Base64.decode(val2.innerHTML);
+                    var test = tes.split(/\\strokec0/g)
+                    return val.attributes.name.nodeValue == "Blank" ? "[blank]" : tes.indexOf("Double-click to edit") != -1 ? "" : test[test.length -1] 
+                }).toArray().map(function(val2, i2) { return val2.replace(/\\/g, "").replace(/\}/g, "").trim(); }).join("\n\n")
+            }
+        })
+        
+        var output_html = ""
+        $(arrangements).each(function (i, val) {
+            output_html += '<a class="arrangment_select_button" data-id="' + val.id + '">' + val.name + '</a>'
+        });
+        
+        $("#info_modal .modal-title").html("Select Arrangment");
+        $("#info_modal .modal-body").html(output_html);
+        $("#info_modal").modal();         
     }
 
     function getParameterByName(name, url) {
