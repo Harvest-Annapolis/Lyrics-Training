@@ -342,7 +342,7 @@ $(function () {
                 slides: $($(val).find("NSString")).map(function(i2, val2) {
                     var tes = Base64.decode(val2.innerHTML);
                     var test = tes.split(/\\strokec0/g)
-                    return val.attributes.name.nodeValue == "Blank" ? "[blank]" : tes.indexOf("Double-click to edit") != -1 ? "" : test[test.length -1] 
+                    return val.attributes.name.nodeValue == "Intro" ? "" : val.attributes.name.nodeValue == "Ending" ? "" : val.attributes.name.nodeValue == "Blank" ? "[blank]" : tes.indexOf("Double-click to edit") != -1 ? "" : test[test.length -1] 
                 }).toArray().map(function(val2, i2) { return val2.replace(/\\/g, "").replace(/\}/g, "").trim(); }).join("\n\n")
             }
         })
